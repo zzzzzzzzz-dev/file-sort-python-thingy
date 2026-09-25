@@ -1,4 +1,4 @@
-"""The small, boring-on-purpose core of Tidy Downloads."""
+"file sort thingy"
 
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ def category_for(path: Path) -> str:
 
 
 def unique_destination(directory: Path, filename: str) -> Path:
-    """Return a destination that will not overwrite an existing file."""
+ 
     candidate = directory / filename
     if not candidate.exists():
         return candidate
@@ -53,7 +53,6 @@ def unique_destination(directory: Path, filename: str) -> Path:
 
 
 def plan(source_dir: Path, include_hidden: bool = False) -> list[PlannedMove]:
-    """Build a move plan without touching the filesystem."""
     if not source_dir.exists():
         raise FileNotFoundError(source_dir)
     moves: list[PlannedMove] = []
@@ -72,7 +71,6 @@ def plan(source_dir: Path, include_hidden: bool = False) -> list[PlannedMove]:
 
 
 def apply_moves(moves: list[PlannedMove], history_dir: Path) -> Path:
-    """Apply a plan and save enough information to undo exactly this run."""
     history_dir.mkdir(parents=True, exist_ok=True)
     applied: list[dict[str, str | int]] = []
     for move in moves:
@@ -87,7 +85,6 @@ def apply_moves(moves: list[PlannedMove], history_dir: Path) -> Path:
 
 
 def undo(manifest: Path) -> int:
-    """Reverse a previous run, skipping files that have been changed manually."""
     records = json.loads(manifest.read_text(encoding="utf-8"))
     restored = 0
     for record in reversed(records):
