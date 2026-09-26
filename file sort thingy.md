@@ -1,7 +1,7 @@
 ## Install
 
-clone the git python -m pip install -e .
-
+clone the git python -m pip install -e 
+i think
 
 
 ## File groups
